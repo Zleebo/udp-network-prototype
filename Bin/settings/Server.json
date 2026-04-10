@@ -1,0 +1,38 @@
+{
+    "assets_path": {
+        "engine": {
+            "absolute": "",
+            "relative": "../EngineAssets/"
+        },
+        "game": {
+            "absolute": "",
+            "relative": "../Source/Server/data/"
+        }
+    },
+    "enable_vsync": true,
+    "window_settings": {
+        "aspect_ratio": 1.7,
+        "clear_color": {
+            "a": 1.0,
+            "b": 0.25,
+            "g": 0.2,
+            "r": 0.0
+        },
+        "keep_aspect_ratio": true,
+        "render_size": {
+            "h": 900,
+            "w": 1600
+        },
+        "start_in_fullscreen": false,
+        "target_size": {
+            "h": 900,
+            "w": 1600
+        },
+        "title": "UDP Network Prototype Server",
+        "use_letterbox_and_pillarbox": false,
+        "window_size": {
+            "h": 900,
+            "w": 1600
+        }
+    }
+}
