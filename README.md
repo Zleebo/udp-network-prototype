@@ -1,58 +1,33 @@
 # UDP Network Prototype
 
-This repository contains a Windows/Visual Studio UDP gameplay networking prototype built around a small client/server sandbox. It focuses on message batching, acknowledgements, resend logic, position replication, interpolation, and a lightweight in-game network debug overlay.
+Small client/server sandbox I built to work through the fundamentals of UDP game networking. The interesting part isn't the gameplay but the transport layer: batched packets, sequence numbers, cumulative ACKs, selective resends for non-position messages, and client-side interpolation to smooth out gaps between updates.
 
-## Highlights
+There's also an in-game debug overlay showing RTT, throughput, packet loss, and per-message-type stats, which made tuning a lot easier.
 
-- UDP client/server transport on localhost
-- Message types for join, quit, position, object updates, and acknowledgements
-- Batched packet writes with fixed-size message serialization
-- Reliable resend tracking for non-position gameplay messages
-- Position acknowledgement handling for high-frequency movement updates
-- Client-side interpolation for replicated actors and moving objects
-- Optional packet-loss and latency simulation hooks in the networking helpers
-- Debug overlay for RTT, throughput, packet loss, and message type statistics
+## Building
 
-## Project Layout
+Open `Server.sln` in Visual Studio 2022 (v143 toolset, Windows 10 SDK), pick `Debug | x64`, and build. The client binary ends up in `Bin/` alongside the required DLLs and shader files.
 
-- `Game.sln` builds the playable client
-- `Server.sln` builds the server and client together for local testing
-- `Source/Game/` contains the client runtime and gameplay loop
-- `Source/Server/` contains the UDP server
-- `Source/Shared/` contains shared network data and the debug overlay
-- `Source/Engine/` and `Source/External/` contain the engine/runtime support code required by the prototype
+## Running
 
-## Requirements
-
-- Windows
-- Visual Studio 2022 with the `v143` toolset
-- Windows 10 SDK
-
-## Build
-
-1. Open `Server.sln` in Visual Studio 2022.
-2. Select `Debug | x64`.
-3. Build the solution.
-
-The client executable is written to `Bin/`. Required runtime DLLs and shader binaries are already included in this repository.
-
-## Run
-
-1. Start the server project.
-2. Start the game/client project.
-3. Move the local player with `W`, `A`, `S`, and `D`.
+Start the server project first, then the client. The client connects to `127.0.0.1:42000` automatically.
 
 Controls:
+- `WASD` — move the local player
+- `B` — spawn an object
+- `C` — remove a nearby object
+- `V` — spawn a moving circular object
 
-- `WASD` moves the local player
-- `B` creates an object
-- `C` removes a nearby object
-- `V` creates a moving circular object
+## Layout
 
-## Notes
+| Folder | Contents |
+|--------|----------|
+| `Source/Game/` | Client runtime and gameplay loop |
+| `Source/Server/` | UDP server |
+| `Source/Shared/` | Network data structures and debug overlay |
+| `Source/Engine/` | Engine support code |
+| `Source/External/` | Third-party dependencies |
 
-- The prototype targets `127.0.0.1:42000`.
-- Project settings live in `Bin/settings/`.
-- Engine assets are loaded from `EngineAssets/`.
-- Vendored third-party code and licenses are preserved where required.
+`Game.sln` builds just the client. `Server.sln` builds both.
 
+Settings are loaded from `Bin/settings/` and engine assets from `EngineAssets/`.
