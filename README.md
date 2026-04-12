@@ -1,6 +1,6 @@
 # UDP Network Prototype
 
-Small client/server sandbox I built to work through the fundamentals of UDP game networking. The interesting part isn't the gameplay but the transport layer: batched packets, sequence numbers, cumulative ACKs, selective resends for non-position messages, and client-side interpolation to smooth out gaps between updates.
+Prototype focused on a common multiplayer problem: keeping gameplay responsive over UDP while still recovering from packet loss and out-of-order delivery. The transport layer handles batched packets, sequence numbers, cumulative ACKs, selective resends for non-position messages, and client-side interpolation to smooth out gaps between updates.
 
 There's also an in-game debug overlay showing RTT, throughput, packet loss, and per-message-type stats, which made tuning a lot easier.
 
