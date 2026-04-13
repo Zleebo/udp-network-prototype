@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 #include <wrl/client.h>
 
 using Microsoft::WRL::ComPtr;

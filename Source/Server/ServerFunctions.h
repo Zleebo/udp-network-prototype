@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Shared/Network-Shared.h"
+#include "../Shared/NetworkShared.h"
 
 #include <cstring>
 #include <type_traits>

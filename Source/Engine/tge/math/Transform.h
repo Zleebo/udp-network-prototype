@@ -1,6 +1,6 @@
 #pragma once
-#include <tge/Math/Vector.h>
-#include <tge/Math/Matrix.h>
+#include <tge/math/Vector.h>
+#include <tge/math/Matrix.h>
 
 namespace Tga
 {
@@ -51,27 +51,6 @@ public:
 
 		return result;
 	}
-	
-	//FORCEINLINE Matrix4x4f GetMatrix(bool bNoScale = false)
-	//{
-	//	if(IsDirty)
-	//	{
-	//		matrixCache = Matrix4x4f::CreateIdentityMatrix();
-
-	//		if (bNoScale)
-	//			matrixCache *= Matrix4x4f::CreateScaleMatrix({ 1, 1, 1 });
-	//		else
-	//			matrixCache *= Matrix4x4f::CreateScaleMatrix(myScale);
-
-	//		matrixCache *= Matrix4x4f::CreateRollPitchYawMatrix(myRotation);
-	//		matrixCache *= Matrix4x4f::CreateTranslationMatrix(myPosition);
-	//		
-	//		IsDirty = false;
-	//	}
-
-
-	//	return matrixCache;
-	//}
 
 	VectorRegister VectorTransformVector(const VectorRegister& VecP, const void* MatrixM) const
 	{

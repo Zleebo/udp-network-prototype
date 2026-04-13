@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 #include <tge/Graphics/TextureResource.h>
 #include <wrl/client.h>
 #include <dxgiformat.h>

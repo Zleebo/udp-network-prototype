@@ -4,7 +4,7 @@
 #include <tge/Graphics/RenderTarget.h>
 #include <tge/Graphics/GraphicsStateStack.h>
 #include <tge/Math/Color.h>
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 #include <thread>
 #include <wrl/client.h>
 

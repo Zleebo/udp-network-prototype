@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Engine/tge/math/vector2.h"
+#include "../Engine/tge/math/Vector2.h"
 
 #include <WinSock2.h>
 #include <WS2tcpip.h>

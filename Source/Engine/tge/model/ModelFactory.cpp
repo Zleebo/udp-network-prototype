@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "ModelFactory.h"
 
-#include <fstream>
-
 #include <tge/animation/animationPlayer.h>
 #include <tge/graphics/DX11.h>
 #include <tge/util/StringCast.h>
@@ -31,7 +29,6 @@ ModelFactory* ModelFactory::myInstance = nullptr;
 
 #define NUM_BONES_PER_VERTEX 4
 
-using namespace Tga;
 
 //Matrix4x4f ConvertToEngineMatrix33(const aiMatrix3x3& AssimpMatrix)
 //{
@@ -94,8 +91,6 @@ struct VertexBoneData
 			}
 		}
 
-		// should never get here - more bones than we have space for
-		//assert(0);
 	}
 };
 
@@ -329,9 +324,6 @@ bool ModelFactory::InitUnitCube()
 		20, 22, 23      /* /| */
 	};
 
-	//const Vector3f extentsCenter = 0.5f * (minExtents + maxExtents);
-	//const Vector3f boxExtents = 0.5f * (maxExtents - minExtents);
-	//const float myBoxSphereRadius = FMath::Max(boxExtents.X, FMath::Max(boxExtents.Y, boxExtents.Z));
 
 	HRESULT result;
 
@@ -425,9 +417,6 @@ bool ModelFactory::InitUnitPlane()
 
 	mdlIndices = { 0, 1, 2, 0, 2, 3 };
 
-	//const Vector3f extentsCenter = 0.5f * (minExtents + maxExtents);
-	//const Vector3f boxExtents = 0.5f * (maxExtents - minExtents);
-	//const float myBoxSphereRadius = FMath::Max(boxExtents.X, FMath::Max(boxExtents.Y, boxExtents.Z));
 
 	HRESULT result;
 
@@ -651,15 +640,10 @@ ModelInstance ModelFactory::GetUnitPlane()
 bool ModelFactory::ModelHasMesh(const std::wstring&)
 {
 	return true;
-	// New FBX does not have this function, It checked if the file was an fbx
-	//const std::string ansiFileName = string_cast<std::string>(someFilePath);
-	//return TGA::FBX::Importer::IsValidModelFile(ansiFileName);
 }
 
 std::shared_ptr<Model> ModelFactory::LoadModelW(const std::wstring& someFilePath)
 {
-	// The FBX SDK doesn't like widechar :(.
-	//const std::string ansiFileName = string_cast<std::string>(someFilePath);
 	std::wstring resolved_path = Tga::Settings::ResolveAssetPathW(someFilePath);
 	const std::string path = Tga::Settings::ResolveAssetPath(string_cast<std::string>(resolved_path));
 
@@ -728,9 +712,7 @@ std::shared_ptr<Model> ModelFactory::LoadModelW(const std::wstring& someFilePath
 						element.Vertices[v].VertexColors[vCol][3]
 					};
 
-					//FIX ME. Sets vertex colors to 1 if no data given
-					// Daniel säger att FBX inportern läser vertex collors rätt, och om den läser färgerna rätt så får den det värdet. 
-					// Vilket leder till svart i vertex colors -> modeller blev transparenta.
+					// Default missing vertex-color data to white so meshes do not render as transparent.
 					if (element.Vertices[v].VertexColors[vCol][0] + element.Vertices[v].VertexColors[vCol][1] + element.Vertices[v].VertexColors[vCol][2] + element.Vertices[v].VertexColors[vCol][3] == 0)
 					{
 						mdlVertices[v].VertexColors[vCol] = { 1,1,1,1 };
@@ -785,7 +767,7 @@ std::shared_ptr<Model> ModelFactory::LoadModelW(const std::wstring& someFilePath
 			}
 
 			D3D11_BUFFER_DESC indexBufferDesc{};
-			indexBufferDesc.ByteWidth = static_cast<UINT>(mdlIndices.size()) * static_cast<UINT>(sizeof(float)); // TODO: What :P Sizeof should be uint.
+			indexBufferDesc.ByteWidth = static_cast<UINT>(mdlIndices.size()) * static_cast<UINT>(sizeof(unsigned int));
 			indexBufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
 			indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 

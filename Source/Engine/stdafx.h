@@ -8,8 +8,8 @@
 #endif
 
 #include <tge/math/matrix4x4.h>
-#include <tge/math/vector2.h>
-#include <tge/math/vector4.h>
+#include <tge/math/Vector2.h>
+#include <tge/math/Vector4.h>
 #include <tge/sprite/sprite.h>
 #include <tge/shaders/shader.h>
 

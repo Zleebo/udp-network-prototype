@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Shared/Network-Shared.h"
+#include "../Shared/NetworkShared.h"
 
 #include <WinSock2.h>
 #include <WS2tcpip.h>

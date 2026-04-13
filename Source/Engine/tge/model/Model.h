@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 #include <tge/Animation/Skeleton.h>
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 #include <tge/Math/Transform.h>
 
 struct ID3D11Buffer;

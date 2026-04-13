@@ -8,6 +8,6 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "Network-Shared.h"
+#include "NetworkShared.h"
 
 #endif //PCH_H

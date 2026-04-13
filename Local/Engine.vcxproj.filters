@@ -249,10 +249,10 @@
     <ClInclude Include="..\Source\Engine\tge\math\color.h">
       <Filter>tge\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Engine\tge\math\vector2.h">
+    <ClInclude Include="..\Source\Engine\tge\math\Vector2.h">
       <Filter>tge\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Engine\tge\math\vector4.h">
+    <ClInclude Include="..\Source\Engine\tge\math\Vector4.h">
       <Filter>tge\math</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Engine\tge\model\AnimatedModelInstance.h">

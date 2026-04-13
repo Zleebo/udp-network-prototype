@@ -4,7 +4,7 @@ Use this class to create and show a text
 
 #pragma once
 #include <tge/math/Color.h>
-#include <tge/math/vector2.h>
+#include <tge/math/Vector2.h>
 #include <tge/render/RenderCommon.h>
 #include <string>
 #include <memory>

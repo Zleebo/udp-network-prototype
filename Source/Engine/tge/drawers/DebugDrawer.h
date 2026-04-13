@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include <tge/math/vector2.h>
-#include <tge/math/vector4.h>
+#include <tge/math/Vector2.h>
+#include <tge/math/Vector4.h>
 #include <tge/math/color.h>
 
 #ifndef _RETAIL

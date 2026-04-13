@@ -1,7 +1,7 @@
 #pragma once
 
 #include <tge/EngineDefines.h>
-#include <tge/Math/Matrix.h>
+#include <tge/math/Matrix.h>
 
 namespace Tga
 {

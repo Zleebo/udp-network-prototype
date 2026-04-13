@@ -3,7 +3,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 #include <tge/Math/Transform.h>
 
 namespace Tga

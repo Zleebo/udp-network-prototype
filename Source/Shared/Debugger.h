@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Source/External/imgui/imgui.h"
-#include "Network-Shared.h"
+#include "NetworkShared.h"
 
 #include <chrono>
 #include <map>

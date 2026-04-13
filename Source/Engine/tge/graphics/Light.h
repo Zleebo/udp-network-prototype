@@ -1,7 +1,7 @@
 #pragma once
 #include <tge/Math/Color.h>
 #include <tge/Math/Transform.h>
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 
 namespace Tga
 {

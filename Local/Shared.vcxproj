@@ -155,7 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Shared\Debugger.h" />
-    <ClInclude Include="..\Source\Shared\Network-Shared.h" />
+    <ClInclude Include="..\Source\Shared\NetworkShared.h" />
     <ClInclude Include="..\Source\Shared\pch.h" />
   </ItemGroup>
   <ItemGroup>

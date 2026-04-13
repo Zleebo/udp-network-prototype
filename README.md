@@ -20,10 +20,17 @@ Open `Server.sln` in Visual Studio 2022 (v143 toolset, Windows 10 SDK), pick `De
 Start the server project first, then the client. The client connects to `127.0.0.1:42000` automatically.
 
 Controls:
-- `WASD` — move the local player
-- `B` — spawn an object
-- `C` — remove a nearby object
-- `V` — spawn a moving circular object
+- `WASD` - move the local player
+- `B` - spawn an object
+- `C` - remove a nearby object
+- `V` - spawn a moving circular object
+
+## Where To Look First
+
+- `Source/Shared/NetworkShared.h` for the packet/message layouts, sequence numbers, and ACK-related shared state
+- `Source/Server/Server.cpp` for batching, resend handling, cumulative ACK processing, and world-state replication
+- `Source/Game/source/ClientObject.cpp` for client-side interpolation and remote entity updates
+- `Source/Shared/Debugger.cpp` for the in-game networking debug overlay
 
 ## Layout
 

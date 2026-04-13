@@ -38,7 +38,7 @@ namespace Tga
 		Quaternion<T>(const Vector3<T>& aVector, const T aAngle);
 		Quaternion<T>(const Matrix4x4<T>& aMatrix);
 
-		//Set from Unity values - Flip X and Z values, W and Y remains the same
+		// Unity and this engine use different handedness, so X and Z are flipped.
 		void SetFromUnityValues(const T aW, const T aX, const T aY, const T aZ);
 
 		void RotateWithEuler(const Vector3<T>& anEuler);
@@ -52,7 +52,6 @@ namespace Tga
 		T Length() const;
 		T Length2() const;
 		inline Vector3<T> GetEulerAnglesRadians() const;
-		inline Vector3<T> GetEulerAnglesRadiansd() const;
 		inline Vector3<T> GetEulerAnglesDegrees() const;
 		inline Matrix33<T> GetRotationMatrix33() const;
 		inline Matrix4x4<T> GetRotationMatrix4x4f() const;
@@ -127,11 +126,6 @@ namespace Tga
 		X = aVector.X * halfAngleSin;
 		Y = aVector.Y * halfAngleSin;
 		Z = aVector.Z * halfAngleSin;
-
-		//W = cos(aAngle / T(2));
-		//X = cos(axis.X) * sin(aAngle / T(2));
-		//Y = cos(axis.Y) * sin(aAngle / T(2));
-		//Z = cos(axis.Z) * sin(aAngle / T(2));
 	}
 
 	template<class T>
@@ -148,11 +142,11 @@ namespace Tga
 
 #ifndef _RETAIL
 	// Prints the Quaternion, example use case: std::cout << q << std::endl;
-	template <class T> inline std::ostream& operator<<(std::ostream& stream, const Quaternion<T>& aQuat)
-	{
-		std::cout << "W: " << aQuat.W << "  X: " << aQuat.X << "  Y: " << aQuat.Y << "  Z: " << aQuat.Z;
-		return stream;
-	}
+template <class T> inline std::ostream& operator<<(std::ostream& stream, const Quaternion<T>& aQuat)
+{
+	stream << "W: " << aQuat.W << "  X: " << aQuat.X << "  Y: " << aQuat.Y << "  Z: " << aQuat.Z;
+	return stream;
+}
 #endif //!_RETAIL
 
 	template <class T> inline Quaternion<T> operator*(const Quaternion<T>& aQuat, const T& aScalar)
@@ -185,20 +179,14 @@ namespace Tga
 
 	template <class T> inline void operator*=(Quaternion<T>& aQuat0, const Quaternion<T>& aQuat1)
 	{
-		T w = aQuat0.W;
-		T x = aQuat0.X;
-		T y = aQuat0.Y;
-		T z = aQuat0.Z;
+	T w = aQuat0.W;
+	T x = aQuat0.X;
+	T y = aQuat0.Y;
+	T z = aQuat0.Z;
 
-		//aQuat0.W = W * aQuat1.W - X * aQuat1.X - Y * aQuat1.Y - Z * aQuat1.Z;
-		//aQuat0.X = W * aQuat1.X + X * aQuat1.W + Y * aQuat1.Z - Z * aQuat1.Y;
-		//aQuat0.Y = W * aQuat1.Y - X * aQuat1.Z + Y * aQuat1.W + Z * aQuat1.X;
-		//aQuat0.Z = W * aQuat1.Z + X * aQuat1.Y - Y * aQuat1.X + Z * aQuat1.W;
-
-
-		aQuat0.W = (aQuat1.W * w) - (aQuat1.X * x) - (aQuat1.Y * y) - (aQuat1.Z * z);
-		aQuat0.X = (aQuat1.W * x) + (aQuat1.X * w) + (aQuat1.Y * z) - (aQuat1.Z * y);
-		aQuat0.Y = (aQuat1.W * y) + (aQuat1.Y * w) + (aQuat1.Z * x) - (aQuat1.X * z);
+	aQuat0.W = (aQuat1.W * w) - (aQuat1.X * x) - (aQuat1.Y * y) - (aQuat1.Z * z);
+	aQuat0.X = (aQuat1.W * x) + (aQuat1.X * w) + (aQuat1.Y * z) - (aQuat1.Z * y);
+	aQuat0.Y = (aQuat1.W * y) + (aQuat1.Y * w) + (aQuat1.Z * x) - (aQuat1.X * z);
 		aQuat0.Z = (aQuat1.W * z) + (aQuat1.Z * w) + (aQuat1.X * y) - (aQuat1.Y * x);
 
 	}
@@ -349,8 +337,8 @@ namespace Tga
 	template<class T>
 	inline Vector3<T> Quaternion<T>::GetRight() const
 	{
-		Vector3<T> right = { 1.f, 0.f, 0.f };
-		return Quaternion<T>::RotateVectorByQuaternion(*this, right);;
+	Vector3<T> right = { 1.f, 0.f, 0.f };
+	return Quaternion<T>::RotateVectorByQuaternion(*this, right);
 	}
 
 	template<class T>
@@ -402,34 +390,6 @@ namespace Tga
 		return Vector3<T>(pitch, yaw, roll);
 		//return Vector3<T>(roll, pitch, yaw);
 	}
-
-	template<class T>
-	inline Vector3<T> Quaternion<T>::GetEulerAnglesRadiansd() const
-	{
-		float yaw, pitch, roll;
-		float test = X * Y + Z * W;
-		if (test > 0.499) { // singularity at north pole
-			yaw = 2 * atan2(X, W);
-			roll = FMath::Pi_Half;
-			pitch = 0;
-			return Vector3<T>{ pitch, yaw, roll };
-		}
-		if (test < -0.499) { // singularity at south pole
-			yaw = -2 * atan2(X, W);
-			roll = -FMath::Pi_Half;
-			pitch = 0;
-			return Vector3<T>{ pitch, yaw, roll };
-		}
-		float sqx = X * X;
-		float sqy = Y * Y;
-		float sqz = Z * Z;
-		yaw = atan2(2 * Y * W - 2 * X * Z, 1 - 2 * sqy - 2 * sqz);
-		roll = asin(2 * test);
-		pitch = atan2(2 * X * W - 2 * Y * Z, 1 - 2 * sqx - 2 * sqz);
-		return Vector3<T>{ pitch, yaw, roll };
-	}
-
-
 
 	template<class T>
 	inline Vector3<T> Quaternion<T>::RotateVectorByQuaternion(const Quaternion<T>& aQuaternion, const Vector3f& aVectorToRotate)

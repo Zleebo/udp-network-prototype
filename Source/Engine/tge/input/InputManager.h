@@ -1,7 +1,7 @@
 #pragma once
 #include "Windows.h"
 #include <bitset>
-#include <tge/Math/Vector.h>
+#include <tge/math/Vector.h>
 
 namespace Tga
 {
@@ -27,7 +27,6 @@ class InputManager
 	HWND myOwnerHWND;
 	
 
-	// TEMP PUBLIC
 	Vector2i myTentativeMousePosition;
 	Vector2i myCurrentMousePosition;
 	Vector2i myPreviousMousePosition;

@@ -1,7 +1,6 @@
 #pragma once
 #include <array>
 #include <cmath>
-#include <assert.h>
 #include <istream>
 #include <tuple>
 #include "Vector2.h"
@@ -61,11 +60,6 @@ namespace Tga
 
 		static Vector3<T> NLerp(const Vector3<T>& aStart, const Vector3<T>& aEnd, const float aPercent);
 
-		//static Vector3<T> Zero();
-		//static Vector3<T> One();
-		//static Vector3<T> Forward( );
-		//static Vector3<T> Right( );
-		//static Vector3<T> Up( );
 	};
 
 	typedef Vector3<float> Vector3f;
@@ -85,7 +79,7 @@ namespace Tga
 	template <class T> bool operator==(const Vector3<T>& aVector0, const Vector3<T>& aVector1);
 	template <class T> bool operator!=(const Vector3<T>& aVector0, const Vector3<T>& aVector1);
 	template <class T> std::istream& operator>>(std::istream& in, Vector3<T>& aVec);
-	template <class T> std::ostream& operator>>(std::ostream& out, const Vector3<T>& aVec);
+	template <class T> std::ostream& operator<<(std::ostream& out, const Vector3<T>& aVec);
 	template <class T> bool operator<(const Vector3<T>& aVector0, const Vector3<T>& aVector1);
 #pragma region MemberDefinitions
 
@@ -139,7 +133,6 @@ namespace Tga
 	{
 		X = aXY.X;
 		Y = aXY.Y;
-		//xy = aXY;
 		Z = aZ;
 	}
 
@@ -185,7 +178,6 @@ namespace Tga
 		const T magnitude = (X * X) + (Y * Y) + (Z * Z);
 
 #ifdef _DEBUG
-		//assert(magnitude != 0 && "Tried to normalize a null vector ");
 		if (magnitude == 0) return;
 #endif // _DEBUG
 
@@ -319,36 +311,10 @@ namespace Tga
 	template<class T>
 	inline Vector3<T> Vector3<T>::NLerp(const Vector3<T>& aStart, const Vector3<T>& aEnd, const float aPercent)
 	{
-		return Lerp(aStart, aEnd, aPercent).Normalize();
+		Vector3<T> result = Lerp(aStart, aEnd, aPercent);
+		result.Normalize();
+		return result;
 	}
-
-	//template <class T>
-	//inline Vector3<T> Vector3<T>::Zero()
-	//{
-	//	return { 0, 0, 0 };
-	//}
-
-	//template <class T>
-	//Vector3<T> Vector3<T>::One()
-	//{
-	//	return { 1, 1, 1 };
-	//}
-
-	//template<class T>
-	//inline Vector3<T> Vector3<T>::Forward( )
-	//{
-	//	return { 0, 0, 1 };
-	//}
-	//template<class T>
-	//inline Vector3<T> Vector3<T>::Right( )
-	//{
-	//	return  { 1, 0, 0 };
-	//}
-	//template<class T>
-	//inline Vector3<T> Vector3<T>::Up( )
-	//{
-	//	return { 0, 1, 0 };
-	//}
 #pragma endregion Static Functions
 
 	template<typename T>

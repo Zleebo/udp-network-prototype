@@ -18,7 +18,7 @@
     <ClCompile Include="..\Source\Server\Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Server\mainmain.cpp">
+    <ClCompile Include="..\Source\Server\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

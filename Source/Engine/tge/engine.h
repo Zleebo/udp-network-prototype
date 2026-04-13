@@ -12,7 +12,7 @@ It takes care of creating everything necessary for window handling and rendering
 
 #include <functional>
 #include <tge/math/color.h>
-#include <tge/math/vector2.h>
+#include <tge/math/Vector2.h>
 #include <tge/render/RenderCommon.h>
 #include <chrono>
 #include "StepTimer.h"
